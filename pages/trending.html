@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trending | K-Drama Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <a href="/" class="navbar-logo">🎬 K-Drama Hub</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="dramas.html">Dramas</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="trending.html" class="active">Trending</a></li>
+      </ul>
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." />
+      </div>
+      <div class="auth-buttons">
+        <a href="login.html" class="btn-login">Login</a>
+        <a href="signup.html" class="btn-signup">Sign Up</a>
+      </div>
+      <button class="menu-toggle">☰</button>
+    </nav>
+
+    <!-- Trending Section -->
+    <section class="content-section" style="margin-top: 70px">
+      <h1 class="section-title">🔥 Trending Now</h1>
+      <p class="section-subtitle">This week's hottest K-dramas and movies</p>
+
+      <!-- Tabs -->
+      <div class="filters-container">
+        <button class="filter-button active" data-filter="all-trending">
+          All Trending
+        </button>
+        <button class="filter-button" data-filter="dramas-trending">
+          Trending Dramas
+        </button>
+        <button class="filter-button" data-filter="movies-trending">
+          Trending Movies
+        </button>
+      </div>
+
+      <!-- All Trending -->
+      <div id="all-trending" class="trending-container">
+        <div id="all-trending-list"></div>
+      </div>
+
+      <!-- Dramas Trending -->
+      <div
+        id="dramas-trending"
+        class="trending-container"
+        style="display: none"
+      >
+        <h3 style="font-size: 20px; margin-bottom: 20px">
+          Top Trending K-Dramas
+        </h3>
+        <div id="dramas-trending-list"></div>
+      </div>
+
+      <!-- Movies Trending -->
+      <div
+        id="movies-trending"
+        class="trending-container"
+        style="display: none"
+      >
+        <h3 style="font-size: 20px; margin-bottom: 20px">
+          Top Trending Movies
+        </h3>
+        <div id="movies-trending-list"></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>About K-Drama Hub</h4>
+          <p style="font-size: 13px; color: #999; line-height: 1.6">
+            Your ultimate destination for Korean dramas and movies. Stream your
+            favorite K-dramas and Korean films with premium quality.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="dramas.html">Dramas</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="trending.html">Trending</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" title="Facebook">f</a>
+            <a href="#" title="Twitter">𝕏</a>
+            <a href="#" title="Instagram">📷</a>
+            <a href="#" title="YouTube">▶</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2024 K-Drama Hub. All rights reserved. Not affiliated with
+          Netflix or other streaming services.
+        </p>
+      </div>
+    </footer>
+
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script>
+      setActiveNav("Trending");
+
+      // Create trending lists
+      const allTrending = [...trendingDramas, ...trendingMovies];
+      createTrendingList("all-trending-list", allTrending);
+      createTrendingList("dramas-trending-list", trendingDramas, "drama");
+      createTrendingList("movies-trending-list", trendingMovies, "movie");
+
+      // Tab switching
+      document.querySelectorAll(".filter-button").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          document
+            .querySelectorAll(".filter-button")
+            .forEach((b) => b.classList.remove("active"));
+          this.classList.add("active");
+
+          const filter = this.getAttribute("data-filter");
+          document
+            .querySelectorAll(".trending-container")
+            .forEach((container) => {
+              container.style.display = "none";
+            });
+          document.getElementById(filter).style.display = "block";
+        });
+      });
+    </script>
+  </body>
+</html>

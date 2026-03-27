@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Watchlist | K-Drama Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .empty-watchlist {
+        text-align: center;
+        padding: 60px 20px;
+        color: #999;
+      }
+      .empty-watchlist h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: #ccc;
+      }
+      .empty-watchlist p {
+        font-size: 16px;
+        margin-bottom: 30px;
+      }
+      .empty-watchlist a {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: #e50914;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      .empty-watchlist a:hover {
+        background-color: #c40812;
+      }
+      .watchlist-item-delete {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: rgba(229, 9, 20, 0.8);
+        color: white;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: background-color 0.3s ease;
+        z-index: 10;
+      }
+      .watchlist-item-delete:hover {
+        background-color: #e50914;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <a href="/" class="navbar-logo">🎬 K-Drama Hub</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="dramas.html">Dramas</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="trending.html">Trending</a></li>
+      </ul>
+      <div class="search-bar">
+        <input type="text" placeholder="Search watchlist..." />
+      </div>
+      <div class="auth-buttons">
+        <a href="login.html" class="btn-login">Login</a>
+        <a href="signup.html" class="btn-signup">Sign Up</a>
+      </div>
+      <button class="menu-toggle">☰</button>
+    </nav>
+
+    <!-- Watchlist Section -->
+    <section class="content-section" style="margin-top: 70px">
+      <h1 class="section-title">📋 My Watchlist</h1>
+      <p class="section-subtitle">Content you've saved to watch later</p>
+
+      <div id="watchlist-container"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>About K-Drama Hub</h4>
+          <p style="font-size: 13px; color: #999; line-height: 1.6">
+            Your ultimate destination for Korean dramas and movies. Stream your
+            favorite K-dramas and Korean films with premium quality.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="dramas.html">Dramas</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="trending.html">Trending</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" title="Facebook">f</a>
+            <a href="#" title="Twitter">𝕏</a>
+            <a href="#" title="Instagram">📷</a>
+            <a href="#" title="YouTube">▶</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2024 K-Drama Hub. All rights reserved. Not affiliated with
+          Netflix or other streaming services.
+        </p>
+      </div>
+    </footer>
+
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script>
+      setActiveNav("Watchlist");
+
+      function displayWatchlist() {
+        const watchlist = getWatchlist();
+        const container = document.getElementById("watchlist-container");
+
+        if (watchlist.length === 0) {
+          container.innerHTML = `
+                    <div class="empty-watchlist">
+                        <h3>Your watchlist is empty</h3>
+                        <p>Add dramas and movies to your watchlist to watch them later</p>
+                        <a href="/pages/dramas.html">Browse Dramas</a>
+                        <a href="/pages/movies.html" style="margin-left: 10px;">Browse Movies</a>
+                    </div>
+                `;
+          return;
+        }
+
+        const grid = document.createElement("div");
+        grid.className = "content-grid";
+
+        watchlist.forEach((item) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.style.position = "relative";
+
+          card.innerHTML = `
+                    <button class="watchlist-item-delete" onclick="removeWatchlistItem(${item.id}, '${item.type}')">✕</button>
+                    <img src="${item.poster_url}" alt="${item.title}" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">${item.title}</h3>
+                        <p class="card-genre">${item.genre}</p>
+                        <div class="card-rating">
+                            <span class="card-rating-star">⭐</span>
+                            <span>${formatRating(item.rating)}</span>
+                        </div>
+                    </div>
+                `;
+
+          grid.appendChild(card);
+        });
+
+        container.innerHTML = "";
+        container.appendChild(grid);
+      }
+
+      function removeWatchlistItem(id, type) {
+        removeFromWatchlist(id, type);
+        displayWatchlist();
+        showModal("Removed", "Item removed from your watchlist.");
+      }
+
+      // Initialize watchlist display
+      displayWatchlist();
+
+      // Setup search for watchlist
+      const searchInput = document.querySelector(".search-bar input");
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+          const query = e.target.value.toLowerCase();
+          const watchlist = getWatchlist();
+          const filtered = watchlist.filter((item) =>
+            item.title.toLowerCase().includes(query),
+          );
+
+          const container = document.getElementById("watchlist-container");
+          if (filtered.length === 0) {
+            container.innerHTML = `
+                        <div class="empty-watchlist">
+                            <h3>No results found</h3>
+                            <p>Try searching with different keywords</p>
+                        </div>
+                    `;
+            return;
+          }
+
+          const grid = document.createElement("div");
+          grid.className = "content-grid";
+
+          filtered.forEach((item) => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.style.position = "relative";
+
+            card.innerHTML = `
+                        <button class="watchlist-item-delete" onclick="removeWatchlistItem(${item.id}, '${item.type}')">✕</button>
+                        <img src="${item.poster_url}" alt="${item.title}" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">${item.title}</h3>
+                            <p class="card-genre">${item.genre}</p>
+                            <div class="card-rating">
+                                <span class="card-rating-star">⭐</span>
+                                <span>${formatRating(item.rating)}</span>
+                            </div>
+                        </div>
+                    `;
+
+            grid.appendChild(card);
+          });
+
+          container.innerHTML = "";
+          container.appendChild(grid);
+        });
+      }
+    </script>
+  </body>
+</html>

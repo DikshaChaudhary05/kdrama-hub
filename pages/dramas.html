@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>K-Dramas | K-Drama Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <a href="/" class="navbar-logo">🎬 K-Drama Hub</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="dramas.html" class="active">Dramas</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="trending.html">Trending</a></li>
+      </ul>
+      <div class="search-bar">
+        <input type="text" placeholder="Search dramas..." />
+      </div>
+      <div class="auth-buttons">
+        <a href="login.html" class="btn-login">Login</a>
+        <a href="signup.html" class="btn-signup">Sign Up</a>
+      </div>
+      <button class="menu-toggle">☰</button>
+    </nav>
+
+    <!-- Dramas Section -->
+    <section class="content-section" style="margin-top: 70px">
+      <h1 class="section-title">🎭 K-Dramas</h1>
+      <p class="section-subtitle">Explore the best Korean television series</p>
+
+      <!-- Filters -->
+      <div class="filters-container">
+        <button class="filter-button active" data-genre="All">
+          All Genres
+        </button>
+        <button class="filter-button" data-genre="Romance">❤️ Romance</button>
+        <button class="filter-button" data-genre="Thriller">⚡ Thriller</button>
+        <button class="filter-button" data-genre="Action">💥 Action</button>
+        <button class="filter-button" data-genre="Fantasy">✨ Fantasy</button>
+        <button class="filter-button" data-genre="Comedy">😂 Comedy</button>
+        <button class="filter-button" data-genre="Drama">🎪 Drama</button>
+      </div>
+
+      <!-- Dramas Grid -->
+      <div id="dramas-grid"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>About K-Drama Hub</h4>
+          <p style="font-size: 13px; color: #999; line-height: 1.6">
+            Your ultimate destination for Korean dramas and movies. Stream your
+            favorite K-dramas and Korean films with premium quality.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="dramas.html">Dramas</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="trending.html">Trending</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" title="Facebook">f</a>
+            <a href="#" title="Twitter">𝕏</a>
+            <a href="#" title="Instagram">📷</a>
+            <a href="#" title="YouTube">▶</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2024 K-Drama Hub. All rights reserved. Not affiliated with
+          Netflix or other streaming services.
+        </p>
+      </div>
+    </footer>
+
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script>
+      setActiveNav("Dramas");
+      createGrid("dramas-grid", dramasData, "drama");
+    </script>
+  </body>
+</html>
